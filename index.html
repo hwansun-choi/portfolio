@@ -2608,17 +2608,46 @@ function fetchWeather() {
 
 // 방문자
 function initVisitor() {
-  let count = parseInt(localStorage.getItem('pf_visit_count') || '4');
+  // CountAPI로 실제 방문자 카운트
+  const namespace = 'hwansun-choi-portfolio';
+  const key = 'visitors';
+
+  // 오늘 이미 방문했는지 체크 (중복 방지)
   const lastVisit = localStorage.getItem('pf_last_visit');
   const today = new Date().toDateString();
-  if (lastVisit !== today) {
-    count += 1;
-    localStorage.setItem('pf_visit_count', count);
-    localStorage.setItem('pf_last_visit', today);
+  const isNewVisit = lastVisit !== today;
+
+  if (isNewVisit) {
+    // 새 방문 → hit (카운트 +1)
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+      .then(r => r.json())
+      .then(d => {
+        localStorage.setItem('pf_last_visit', today);
+        const count = d.value;
+        document.getElementById('visitor-count').textContent = count;
+        const pct = Math.min((count / 200) * 100, 100);
+        setTimeout(() => { document.getElementById('visitor-bar').style.width = pct + '%'; }, 100);
+        document.getElementById('visitor-today').textContent = "Today's visit recorded ✓";
+      })
+      .catch(() => {
+        // API 실패시 로컬로 fallback
+        document.getElementById('visitor-count').textContent = '—';
+      });
+  } else {
+    // 오늘 이미 방문 → get (카운트만 조회)
+    fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
+      .then(r => r.json())
+      .then(d => {
+        const count = d.value || 5;
+        document.getElementById('visitor-count').textContent = count;
+        const pct = Math.min((count / 200) * 100, 100);
+        setTimeout(() => { document.getElementById('visitor-bar').style.width = pct + '%'; }, 100);
+        document.getElementById('visitor-today').textContent = 'Already visited today';
+      })
+      .catch(() => {
+        document.getElementById('visitor-count').textContent = '—';
+      });
   }
-  document.getElementById('visitor-count').textContent = count;
-  const pct = Math.min((count / 50) * 100, 100);
-  setTimeout(() => { document.getElementById('visitor-bar').style.width = pct + '%'; }, 100);
 }
 
 // 캘린더
