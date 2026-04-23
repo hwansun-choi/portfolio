@@ -1114,6 +1114,339 @@
   @keyframes blink {
     0%,100% { opacity: 0.35; } 50% { opacity: 0.7; }
   }
+
+/* ============================================
+   MOBILE RESPONSIVE (768px 이하)
+   ============================================ */
+@media (max-width: 768px) {
+  /* 데스크탑 UI 전체 숨김 */
+  #desktop { display: none !important; }
+
+  /* 모바일 UI 표시 */
+  #mobile-ui { display: block !important; }
+}
+
+@media (min-width: 769px) {
+  /* 모바일 UI 숨김 */
+  #mobile-ui { display: none !important; }
+}
+
+/* ============================================
+   MOBILE UI 스타일
+   ============================================ */
+#mobile-ui {
+  display: none;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(80,130,220,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 20% 80%, rgba(140,80,220,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #0d1628 0%, #0a1020 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* 모바일 헤더 */
+.m-header {
+  padding: 52px 24px 24px;
+  position: relative;
+}
+.m-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.m-avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(40,200,64,0.1);
+  border: 1px solid rgba(40,200,64,0.25);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: rgba(80,220,100,0.95);
+}
+.m-avail-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #28c840;
+  box-shadow: 0 0 6px rgba(40,200,64,0.7);
+}
+.m-name {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.m-role {
+  font-size: 14px;
+  color: rgba(100,165,255,0.85);
+  margin-bottom: 14px;
+}
+.m-bio {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+}
+
+/* 카테고리 탭 */
+.m-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 24px 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.m-tabs::-webkit-scrollbar { display: none; }
+.m-tab {
+  flex-shrink: 0;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.m-tab.active {
+  background: rgba(99,160,255,0.2);
+  border-color: rgba(99,160,255,0.4);
+  color: rgba(140,190,255,1);
+}
+
+/* 프로젝트 카드 목록 */
+.m-cards {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 100px;
+}
+.m-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.m-card:active { transform: scale(0.98); }
+.m-card-thumb {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+}
+.m-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.m-card-info {
+  padding: 14px 16px;
+}
+.m-card-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(100,165,255,0.7);
+  margin-bottom: 5px;
+}
+.m-card-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.3;
+}
+
+/* 상세 페이지 */
+#m-detail {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(80,130,220,0.18) 0%, transparent 60%),
+    #0a1020;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0, 0, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#m-detail.open {
+  transform: translateY(0);
+}
+.m-detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 52px 20px 16px;
+  background: linear-gradient(to bottom, rgba(10,16,32,0.95) 80%, transparent);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.m-back-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.m-detail-body {
+  padding: 0 20px 60px;
+}
+.m-detail-year {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 8px;
+}
+.m-detail-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.m-detail-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.m-detail-img {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  margin-bottom: 20px;
+}
+.m-detail-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.m-detail-meta {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+.m-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.m-meta-item {}
+.m-meta-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 4px;
+}
+.m-meta-val {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+}
+.m-meta-sep {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+}
+.m-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+.m-detail-tag {
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(99,160,255,0.1);
+  border: 1px solid rgba(99,160,255,0.2);
+  color: rgba(140,190,255,0.9);
+}
+.m-detail-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(99,160,255,0.1);
+  border: 1px solid rgba(99,160,255,0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: rgba(140,190,255,0.9);
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+/* 하단 Contact 바 */
+.m-contact-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 12px 16px 28px;
+  background: rgba(12,16,30,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+.m-contact-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.m-contact-btn.email {
+  background: rgba(99,160,255,0.1);
+  border-color: rgba(99,160,255,0.25);
+  color: rgba(140,190,255,0.9);
+}
+.m-contact-btn.phone {
+  background: rgba(40,200,64,0.08);
+  border-color: rgba(40,200,64,0.2);
+  color: rgba(80,220,100,0.9);
+}
+}
 </style>
 </head>
 <body>
@@ -2546,5 +2879,197 @@ document.querySelectorAll('.window').forEach(win => {
   });
 });
 </script>
+
+<!-- ============================================
+     MOBILE UI
+     ============================================ -->
+<div id="mobile-ui">
+
+  <!-- 헤더 -->
+  <div class="m-header">
+    <div class="m-header-top">
+      <div class="m-avail">
+        <div class="m-avail-dot"></div>
+        Available for work
+      </div>
+    </div>
+    <div class="m-name">Hwansun<br>Choi</div>
+    <div class="m-role">AE / Content Planner</div>
+    <div class="m-bio">단순한 경험을 넘어, 진정성 있는 메시지로<br>브랜드와 사람을 연결하는 콘텐츠를 기획합니다.</div>
+  </div>
+
+  <!-- 카테고리 탭 -->
+  <div class="m-tabs" id="m-tabs">
+    <div class="m-tab active" onclick="mFilter('all', this)">All</div>
+    <div class="m-tab" onclick="mFilter('sns', this)">SNS</div>
+    <div class="m-tab" onclick="mFilter('video', this)">영상 기획</div>
+    <div class="m-tab" onclick="mFilter('tvc', this)">TVC / 광고</div>
+    <div class="m-tab" onclick="mFilter('campaign', this)">캠페인</div>
+  </div>
+
+  <!-- 카드 목록 -->
+  <div class="m-cards" id="m-cards"></div>
+
+  <!-- 상세 페이지 -->
+  <div id="m-detail">
+    <div class="m-detail-header">
+      <div class="m-back-btn" onclick="mCloseDetail()">‹</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);" id="m-detail-nav"></div>
+    </div>
+    <div class="m-detail-body">
+      <div class="m-detail-year" id="m-d-year"></div>
+      <div class="m-detail-title" id="m-d-title"></div>
+      <div class="m-detail-img" id="m-d-img"></div>
+      <div class="m-detail-desc" id="m-d-desc"></div>
+      <div class="m-detail-meta">
+        <div class="m-meta-row" id="m-d-meta"></div>
+      </div>
+      <div class="m-detail-tags" id="m-d-tags"></div>
+      <div id="m-d-links"></div>
+    </div>
+  </div>
+
+  <!-- 하단 Contact 바 -->
+  <div class="m-contact-bar">
+    <a href="mailto:chs306@gmail.com" class="m-contact-btn email">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+      </svg>
+      chs306@gmail.com
+    </a>
+    <a href="tel:01020410358" class="m-contact-btn phone">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.08 1.18 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      010-2041-0358
+    </a>
+  </div>
+</div>
+
+<script>
+// ============================================
+// MOBILE JS
+// ============================================
+let mCurrentCat = 'all';
+let mCurrentIdx = 0;
+let mFilteredItems = [];
+
+function mInit() {
+  mFilteredItems = ALL;
+  mRenderCards(ALL);
+}
+
+function mFilter(cat, el) {
+  document.querySelectorAll('.m-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  mCurrentCat = cat;
+  const items = cat === 'all' ? ALL : ALL.filter(p => p.cat === cat);
+  mFilteredItems = items;
+  mRenderCards(items);
+}
+
+function mRenderCards(items) {
+  const container = document.getElementById('m-cards');
+  container.innerHTML = items.map((p, i) => {
+    const hasImg = p.imgKey && IMG[p.imgKey];
+    const thumb = hasImg
+      ? `<div class="m-card-thumb"><img src="${IMG[p.imgKey]}" alt="${p.name}"></div>`
+      : `<div class="m-card-thumb" style="background:${p.bg || 'rgba(255,255,255,0.03)'};">${p.emoji || ''}</div>`;
+    return `<div class="m-card" onclick="mOpenDetail(${i})">
+      ${thumb}
+      <div class="m-card-info">
+        <div class="m-card-tag">${p.tag}</div>
+        <div class="m-card-name">${p.name}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function mOpenDetail(idx) {
+  const p = mFilteredItems[idx];
+  mCurrentIdx = idx;
+
+  // 네비 표시
+  document.getElementById('m-detail-nav').textContent = `${idx+1} / ${mFilteredItems.length}`;
+
+  // 내용 채우기
+  document.getElementById('m-d-year').textContent = `${p.year}${p.client ? ' · ' + p.client : ''}`;
+  document.getElementById('m-d-title').textContent = p.name;
+
+  // 이미지
+  const imgBox = document.getElementById('m-d-img');
+  if (p.imgKey && IMG[p.imgKey]) {
+    imgBox.innerHTML = `<img src="${IMG[p.imgKey]}" alt="${p.name}">`;
+    imgBox.style.display = 'block';
+  } else {
+    imgBox.style.display = 'none';
+  }
+
+  // 설명
+  document.getElementById('m-d-desc').innerHTML = p.desc ? p.desc.replace(/\n/g, '<br>') : '';
+
+  // 메타
+  const metaEl = document.getElementById('m-d-meta');
+  let metaHTML = '';
+  if (p.client) metaHTML += `<div class="m-meta-item"><div class="m-meta-label">Client</div><div class="m-meta-val">${p.client}</div></div>`;
+  if (p.role) {
+    if (metaHTML) metaHTML += '<div class="m-meta-sep"></div>';
+    metaHTML += `<div class="m-meta-item"><div class="m-meta-label">Role</div><div class="m-meta-val">${p.role}</div></div>`;
+  }
+  if (p.period) {
+    if (metaHTML) metaHTML += '<div class="m-meta-sep"></div>';
+    metaHTML += `<div class="m-meta-item"><div class="m-meta-label">Period</div><div class="m-meta-val">${p.period}</div></div>`;
+  }
+  metaEl.innerHTML = metaHTML;
+
+  // 태그
+  document.getElementById('m-d-tags').innerHTML = p.tags.map(t => `<span class="m-detail-tag">${t}</span>`).join('');
+
+  // 링크
+  const linksEl = document.getElementById('m-d-links');
+  if (p.urls && p.urls.length > 0) {
+    linksEl.innerHTML = p.urls.map((u, i) =>
+      `<a class="m-detail-link" href="${u}" target="_blank">🎬 영상 보기 ${p.urls.length > 1 ? i+1 : ''} ↗</a>`
+    ).join('');
+  } else if (p.url) {
+    linksEl.innerHTML = `<a class="m-detail-link" href="${p.url}" target="_blank">🎬 영상 보기 ↗</a>`;
+  } else {
+    linksEl.innerHTML = '';
+  }
+
+  // 열기
+  document.getElementById('m-detail').scrollTop = 0;
+  document.getElementById('m-detail').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function mCloseDetail() {
+  document.getElementById('m-detail').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// 스와이프로 닫기
+let mTouchStartY = 0;
+document.getElementById('m-detail').addEventListener('touchstart', e => {
+  mTouchStartY = e.touches[0].clientY;
+});
+document.getElementById('m-detail').addEventListener('touchend', e => {
+  const dy = e.changedTouches[0].clientY - mTouchStartY;
+  if (dy > 80 && document.getElementById('m-detail').scrollTop === 0) {
+    mCloseDetail();
+  }
+});
+
+// 모바일 초기화
+if (window.innerWidth <= 768) {
+  mInit();
+}
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 768 && document.getElementById('m-cards').children.length === 0) {
+    mInit();
+  }
+});
+</script>
+
 </body>
 </html>
